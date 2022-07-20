@@ -7,37 +7,51 @@ const respostaString = resposta.split("");
 let match = [];
 let vidas = 6;
 
+let ganha = [];
+
+for (let index = 0; index < respostaString.length; index++) {
+  ganha.push('x');
+}
+
 
 for (let size = 0; size < respostaString.length; size++) {
-  match[size]='-'
+  match[size]='_'
 }
 class Forca {
   chutar(letra) { 
-    let pontua = 0;
-    if(!letras.includes(letra)) {
-      letras.push(letra);
-      for (let index = 0; index < respostaString.length; index++) {
-        if (respostaString[index] == letra) {
-          match[index]=letra;
-          pontua++;
-        }
-      console.log(match);
-    }
-    if (pontua <1) {
-      vidas--;
-    }  
-    
-    }
+    if (letra.match(/^\w{1}$/)) {    
+      let pontua = 0;
+      if(!letras.includes(letra)) {
+        letras.push(letra);
+        for (let index = 0; index < respostaString.length; index++) {
+          if (respostaString[index] == letra) {
+            match[index]=letra;
+            pontua++;
+          }
+      }
+      if (pontua <1) {
+        vidas--;
+      }  
+      
+      }
     
 
   }
 
-
+  }
 
   buscarEstado() { 
-    
-    // Possiveis valores: "perdeu", "aguardando chute" ou "ganhou"
-    }
+    //Possiveis valores: "perdeu", "aguardando chute" ou "ganhou"
+      if (JSON.stringify(match) == JSON.stringify(respostaString)){
+        return "ganhou"
+       }
+       else if (vidas <= 0) {
+              return "perdeu";
+       }
+       else {
+         return "aguardando chute";
+       }
+  }
 
   buscarDadosDoJogo() {
 
